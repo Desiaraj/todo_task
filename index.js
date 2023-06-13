@@ -4,8 +4,27 @@
 //initialize the express 
 const express = require('express');
 const port = 8000;  // listen this port 
+const bodyParser = require('body-parser');
 
+
+
+const db = require('./config/mongoose');
+
+const ToDo = require('./models/toDo');
 const app = express();
+
+app.use(express.json());
+app.use(bodyParser.urlencoded({extended:false}));
+
+//set static files like css,js 
+app.use(express.static('./assets'))
+
+app.use('/',require('./routes/index'));
+
+
+//set the ejs as view engine and our statis views folder as views
+app.set('view engine','ejs');
+app.set('views','./views');
 
 app.listen(port,function(err){
   if(err){

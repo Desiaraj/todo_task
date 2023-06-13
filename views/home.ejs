@@ -1,0 +1,85 @@
+<html>
+    <head>
+        <title>
+             <%= title %>
+        </title>
+        <link rel="stylesheet" href="/css/home.css">
+    </head>
+
+    <body>
+        <h1><%= title %></h1>
+        <div id="card">
+
+            <hr class="dotted"/>
+            <form method="POST" id="new-todo" action="create-todo">
+                
+                <div class="input-box">
+                    <label for="title">Title</label>
+                    <input id="title" type="text" name="title" required/>
+                </div>
+                <hr>
+                <div class="input-box">
+                    <label for="description">Description</label>
+                    <input id="description" type="text" name="description" required/> 
+                </div>
+                <hr>
+                
+                <div class="event-time">
+                    <div class="input-box" >
+                        <label for="date">Chose Date </label>
+                        <br>
+                        <input type="date" name="date" value="2023-06-14" min="2023-06-15" max="2023-12-12" required/>
+                    </div>
+                    <div class="input-box">
+                        <label for="cars">Choose a Category:</label>
+                        <br>
+                        <select name="category" id="cars">
+                            <option value="Learning">Learning</option>
+                            <option value="Hoppy">Hoppy</option>
+                            <option value="Work">Work</option>
+                            <option value="Function">Function</option>
+                        </select>
+                    </div>
+                    
+                </div>
+                
+                <br>
+                <br>
+                <button type="submit">Create ToDo</button>
+            
+            </form>
+            <hr class="dotted"/>
+
+        </div>
+        
+        <h1>ToDoList</h1>
+
+        <div id="card_list">
+            <ul>
+                <% for(let i of todo_list) {%>
+                      <div class="contents">
+                        <div class="details">
+                            <h2> <%= i.title %> </h2>
+                             <h3> <%= i.description %></h3>
+                             <p> <%= i.date %></p>
+                             <b> <%= i.category %></b>
+                         </div>
+                         <div class="delete-button">
+                            <a href="/delete-todo/?id=<%= i._id %>">
+                                delete
+                            </a>
+                        </div>
+                      </div>
+                      
+                      
+                    
+                    <hr class="dotted">
+                <% } %>  
+             </ul>
+             <% if(todo_list.length == 0) { %>
+                <h2>No Data Found. Add your ToDo List and make future days better</h2>
+
+             <% } %>
+        </div>
+    </body>
+</html>
